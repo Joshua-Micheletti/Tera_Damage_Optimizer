@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" onload = "window.$ = window.jQuery = module.exports;" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="scripts/Main.js"></script>
+    <script src="scripts/data/classes.js"></script>
+    <script src="scripts/data/bosses.js"></script>
+    <script src = "scripts/data/tanks.js"></script>
+    <script src = "scripts/render.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+  </head>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+  <body>
+
+    <div class = "container-fluid m-0 w-100 text-center" id = "container">
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+      <div class = "row mt-2" id = "buildRow">
+
+<!-- Class tab -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div class = "col-3">
+          <div class = "row">
+            <div id = "class" class = "col ml-2 mr-1 rounded h-100">
+              <!-- class title -->
+              <div class = "row">
+                <div class = "col mt-1">
+                  <h3>Class</h3>
+                </div>
+              </div>
+    
+              <div class = "row text-center align-items-center">
+                <!-- class input -->
+                <div class = "col mb-1 mt-1">
+                  <button type = "button" class = "btn btn-primary btn-responsive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "classButton">Class</button>
+                  <div class = "dropdown-menu" aria-labelledby = "classButton">
+                    <a class = "dropdown-item classSelection" href = "#">Archer</a>
+                    <a class = "dropdown-item classSelection" href = "#">Berserker</a>
+                    <a class = "dropdown-item classSelection" href = "#">Brawler</a>
+                    <a class = "dropdown-item classSelection" href = "#">Gunner</a>
+                    <a class = "dropdown-item classSelection" href = "#">Lancer</a>
+                    <a class = "dropdown-item classSelection" href = "#">Mystic</a>
+                    <a class = "dropdown-item classSelection" href = "#">Ninja</a>
+                    <a class = "dropdown-item classSelection" href = "#">Priest</a>
+                    <a class = "dropdown-item classSelection" href = "#">Reaper</a>
+                    <a class = "dropdown-item classSelection" href = "#">Slayer</a>
+                    <a class = "dropdown-item classSelection" href = "#">Sorcerer</a>
+                    <a class = "dropdown-item classSelection" href = "#">Valkyrie</a>
+                    <a class = "dropdown-item classSelection" href = "#">Warrior</a>
+                  </div>
+                </div> 
+              </div>
+    
+              <div class = "row align-items-center">
+                <div class = "col text-left">
+                  <!-- <button type="button" class="btn buildButton btn-outline-primary" id = "removeBuild">-</button> -->
+                </div>
+                <div class = "col mt-3">
+                  <h3>Build</h3>
+                </div>
+                <div class = "col text-right">
+                  <button type="button" class="btn buildButton btn-outline-primary addBuild" id = "firstPlus">+</button>
+                </div>
+              </div>
+    
+              <!-- crit -->
+              <div class = "row mt-3 mb-3 align-items-end">
+                <!-- base crit -->
+                <div class = "col-4 text-center">
+                  <h5>Base Crit: 
+                    <span class = "text-white" id = "baseCrit">0</span>
+                  </h5>
+                </div>
+                <!-- crit input -->
+                <div class = "col">
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Crit:</span>
+                    </div>
+                    <input type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default" id = "critInput">
+                    <div class = "input-group-append">
+                      <button type = "button" class = "btn btn-primary dropdown-toggle responsiveText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "critButton">Total Crit</button>
+                      <div class = "dropdown-menu" aria-labelledby = "critButton">
+                        <a class = "dropdown-item critSelection" href = "#">Total Crit</a>
+                        <a class = "dropdown-item critSelection" href = "#">Bonus Crit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+    
+              <!-- normal stats -->
+              <div class = "row mt-2 align-items-center">
+                <div class = "col text-center">
+                  <h5>Power</h5>
+                </div>
+                <div class = "col text-center">
+                  <h5>Crit Power</h5>
+                </div>
+              </div>
+              <!-- normal stats input -->
+              <div class = "row mt-2 mb-3">
+                <div class = "col">
+                  <div class="input-group ">
+                    <input id = "powerInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+                <div class = "col">
+                  <div class="input-group ">
+                    <input id = "critPowerInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+              </div>
+    
+              <!-- amplification -->
+              <div class = "row mt-2 align-items-center">
+                <div class = "col text-center">
+                  <h5>Amplification</h5>
+                </div>
+              </div>
+              <!-- amplification input -->
+              <div class = "row mt-2 mb-3">
+                <div class = "col">
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Physical:</span>
+                    </div>
+                    <input id = "physAmpInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Magical:</span>
+                    </div>
+                    <input id = "magAmpInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+              </div>
+    
+              <!-- special crit power -->
+              <div class = "row mt-2 align-items-center">
+                <div class = "col text-center">
+                  <h5>Special Crit Power</h5>
+                </div>
+              </div>
+              <!-- special cp input -->
+              <div class = "row mt-2 mb-3">
+                <div class = "col">
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Physical:</span>
+                    </div>
+                    <input id = "physCPInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Magical:</span>
+                    </div>
+                    <input id = "magCPInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+              </div>
+    
+              <!-- piercing -->
+              <div class = "row mt-2 align-items-center">
+                <div class = "col text-center">
+                  <h5>Special Resistance Piercing</h5>
+                </div>
+              </div>
+              <!-- piercing input -->
+              <div class = "row mt-2 mb-3">
+                <div class = "col">
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Physical:</span>
+                    </div>
+                    <input id = "physPiercingInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Magical:</span>
+                    </div>
+                    <input id = "magPiercingInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+              </div>
+    
+              <!-- ignore -->
+              <div class = "row mt-2 align-items-center">
+                <div class = "col text-center">
+                  <h5>Special Resistance Ignore</h5>
+                </div>
+              </div>
+              <!-- ignore input -->
+              <div class = "row mt-2 mb-3">
+                <div class = "col">
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Physical:</span>
+                    </div>
+                    <input id = "physIgnoreInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-white bg-primary border-0 responsiveText" id="inputGroup-sizing-default">Magical:</span>
+                    </div>
+                    <input id = "magIgnoreInput" type="text" class="form-control bg-dark border-0 text-light text-center responsiveText" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+              </div>
+    
+              <!-- hp / mp (zerk / sorc) -->
+              <div class = "row mt-4 align-items-center">
+                <div class = "col-1">
+                </div>
+                <div class = "col" id = "classSpecificStat">
+                </div>
+                <div class = "col-1">
+                </div>
+              </div>
+    
+              <!-- hit direction -->
+              <div class = "row mt-4 mb-3 align-items-end">
+                <div class = "col">
+                  <h5>Hit Direction</h5>
+                </div>
+                <div class = "col">
+                  <button type = "button" class = "btn btn-primary btn-responsive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "directionButton">Direction</button>
+                  <div class = "dropdown-menu" aria-labelledby = "classButton">
+                    <a class = "dropdown-item directionSelection" href = "#">Back</a>
+                    <a class = "dropdown-item directionSelection" href = "#">Side</a>
+                    <a class = "dropdown-item directionSelection" href = "#">Front</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <div class = "row mt-2">
+
+<!-- Buffs tab -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div id = "buffs" class = "col-4 ml-2 mr-1 rounded h-100">
+          <!-- buffs title -->
+          <div class = "row">
+            <div class = "col mt-1">
+              <h3>Buffs</h3>
+            </div>
+          </div>
+
+          <!-- healer input -->
+          <div class = "row mt-1 mb-3 align-items-end">
+            <div class = "col-4">
+              <button type = "button" class = "btn btn-primary btn-responsive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "healerButton">Healer</button>
+                <div class = "dropdown-menu" aria-labelledby = "healerButton">
+                  <a class = "dropdown-item healerSelection" href = "#">Mystic</a>
+                  <a class = "dropdown-item healerSelection" href = "#">Priest</a>
+                  <a class = "dropdown-item healerSelection" href = "#">Mystic + Priest</a>  
+                  <a class = "dropdown-item healerSelection" href = "#">None</a>  
+                </div>
+            </div>
+
+            <!-- buffed crit -->
+            <div class = "col text-right">
+              <h5>Buffed Crit: 
+                <span class = "text-white" id = "buffedCrit">0</span>
+              </h5>
+            </div>
+          </div>
+        </div>
+
+<!-- Bosses tab -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div id = "bosses" class = "col-3 ml-1 mr-1 rounded h-100">
+          <!-- boss title -->
+          <div class = "row">
+            <div class = "col mt-1">
+              <h3>Boss</h3>
+            </div>
+          </div>
+
+          <!-- boss input -->
+          <div class = "row mb-3">
+            <div class = "col">
+              <button type = "button" class = "btn btn-primary btn-responsive dropdown-toggle" data-toggle = "dropdown" aria-hashpopup = "true" aria-expanded="false" id = "bossButton">Boss</button>
+              <div class = "dropdown-menu" aria-labelledby = "bossButton">
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Kalligar (DAHM)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Kalligar (DANM)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Immortal Kelsaik (CSHM)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Kelsaik (CSNM)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Hagufna (FA)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Ironfang Dixie (SOH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Bahaar</a>
+                <a class = "dropdown-item bossSelection" href = "#">Akalath Travan (AQ)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Akalath Kashir (AQ)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Hellgramite (GVH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Gossamer Reagent (GVH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Nedra (GLSH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Ptakum (GLSH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Kylos (GLSH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Ghergof (AAH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Kalioth (AAH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Nightmare Antaroth (AAH)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Kalavese (RR)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Thormentum (RR)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Argog (RR)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Ventarun (RK9)</a>
+                <a class = "dropdown-item bossSelection" href = "#">Hexapleon (RK9)</a>
+                <a class = "dropdown-item bossSelection" href = "#">RK-9 (RK9)</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- boss info -->
+          <div class = "row align-items-center mb-2">
+            <div class = "col">
+              <h5 class = "text-light m-0">Level</h5>
+            </div>
+            <div class = "col">
+              <div class = "input-group">
+                <input type = "text" value = "0" class = "form-control bg-dark border-0 text-light text-center responsiveText" aria-label = "Default" aria-describedby = "inputGroup-sizing-default" id = "bossLevel">
+              </div>
+            </div>
+          </div>
+          <div class = "row align-items-center mb-2">
+            <div class = "col">
+              <h5 class = "text-light m-0">Crit Resist</h5>
+            </div>
+            <div class = "col">
+              <div class = "input-group">
+                <input type = "text" value = "0" class = "form-control bg-dark border-0 text-light text-center responsiveText" aria-label = "Default" aria-describedby = "inputGroup-sizing-default" id = "critResist">
+              </div>
+            </div>
+          </div>
+          <div class = "row align-items-center mb-3">
+            <div class = "col">
+              <h5 class = "text-light m-0">Amp Resist</h5>
+            </div>
+            <div class = "col">
+              <div class = "input-group">
+                <input type = "text" value = "0" class = "form-control bg-dark border-0 text-light text-center responsiveText" aria-label = "Default" aria-describedby = "inputGroup-sizing-default" id = "ampResist">
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- Debuffs tab -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div id = "debuffs" class = "col ml-1 mr-2 rounded h-100">
+          <div class = "row mt-1">
+            <div class = "col">
+              <h3>Debuffs</h3>
+            </div>
+          </div>
+
+          <div class = "row mb-3 mt-1">
+            <div class = "col">
+              <button type = "button" class = "btn btn-primary btn-responsive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "tankButton">Tank</button>
+              <div class = "dropdown-menu" aria-labelledby = "tankButton">
+                <a class = "dropdown-item tankSelection" href = "#">Lancer</a>
+                <a class = "dropdown-item tankSelection" href = "#">Warrior</a>
+                <a class = "dropdown-item tankSelection" href = "#">Brawler</a>  
+                <a class = "dropdown-item tankSelection" href = "#">Berserker</a>  
+              </div>
+            </div>
+          </div>
+
+          <div class = 'row pt-2 pb-2 align-items-center' style = "background: rgb(40, 40, 40)">
+            <div class = 'col-2'>
+              <img src = 'https://i.imgur.com/eBSNI6N.png' class = 'img-fluid rounded' alt = 'missing image'>
+            </div> 
+            <div class = 'col'>
+              <h5 class = 'text-light m-0'>Kaia's Judgement</h5>
+            </div>
+
+            <div class = 'col-5'>
+              <div class = 'input-group'> 
+                <div class = 'input-group-prepend'> 
+                  <span class = 'input-group-text text-white bg-primary border-0 responsiveText'>Uptime: </span>
+                </div>
+                <input type = 'text' value = '80' class = 'form-control bg-dark border-0 text-light text-center responsiveText' aria-label = 'Default' aria-describedby = 'inputGroup-sizing-default'>
+                  <span class = 'input-group-text text-white bg-primary border-0 responsiveTextHide'>
+                    %
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+<!-- Skills tab -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+      <div class = "row mt-2">
+        <div id = "skills" class = "col ml-2 mr-2 rounded h-100">
+          <!-- skills title -->
+          <div class = "row">
+            <div class = "col">
+              <h3 class = "mt-1  text-center">Skills</h3>
+            </div>
+          </div>
+
+          <!-- skills properties titles -->
+          <div class = "row">
+            <div class = "col-1">
+              <h5>Icon</h5>
+            </div>
+            <div class = "col-2">
+              <h5>Name</h5>
+            </div>
+            <div class = "col-1">
+              <h5>DPS</h5>
+            </div>
+            <div class = "col-1">
+              <h5>Crit Chance</h5>
+            </div>
+            <div class = "col-1">
+              <h5>Build 1</h5>
+            </div>
+            <div class = "col-1">
+              <h5>Build 2</h5>
+            </div>
+            <div class = "col-1">
+              <h5>Build 3</h5>
+            </div>
+            <div class = "col">
+              <h5>Buff Affinity</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- inputs script -->
+    <script src = "scripts/input.js"></script>
+
+  </body>
+</html>
+
